@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:monaco="using:Monaco"
     mc:Ignorable="d"
-    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+    d:DesignHeight="420" d:DesignWidth="680">
 
     <Grid>
         <Grid.RowDefinitions>
