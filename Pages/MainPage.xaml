@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="Codea.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Codea"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:monaco="using:Monaco"
+    mc:Ignorable="d"
+    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="AppTitleBar" Background="Transparent">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Assets/Square44x44Logo.png" 
+           Grid.Column="1" HorizontalAlignment="Left" 
+           Width="20" Height="20" Margin="12,0"/>
+            <TextBlock Text="{StaticResource AppName}" 
+               Grid.Column="1" 
+               Style="{StaticResource CaptionTextBlockStyle}" 
+               Margin="44,8,0,0"/>
+        </Grid>
+
+        <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Collapsed" HorizontalAlignment="Left" Grid.Row="1">
+            <AppBarButton Icon="Document" Label="New..."/>
+            <AppBarButton Icon="OpenLocal" Label="Open file..."/>
+        </CommandBar>
+
+        <monaco:CodeEditor Grid.Row="2" CodeLanguage="javascript" />
+    </Grid>
+</Page>
