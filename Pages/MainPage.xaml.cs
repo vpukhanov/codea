@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Codea
 {
@@ -33,6 +34,13 @@ namespace Codea
             _slowUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _slowUpdateTimer.Tick += SlowUpdateTimer_Tick;
             _slowUpdateTimer.Start();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            CodeEditor.Focus(FocusState.Programmatic);
         }
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = "")

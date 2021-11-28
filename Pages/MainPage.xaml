@@ -39,7 +39,7 @@
             <AppBarButton Icon="OpenLocal" Label="Open file..."/>
         </CommandBar>
 
-        <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" />
+        <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" HasGlyphMargin="True" TabIndex="1" />
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" Padding="8,2,8,2">
             <TextBlock Text="{Binding CursorPositionHint}" d:Text="1:1" />
