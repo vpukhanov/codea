@@ -8,6 +8,7 @@
     xmlns:monaco="using:Monaco"
     mc:Ignorable="d"
     Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     d:DesignHeight="420" d:DesignWidth="680">
 
     <Grid>
@@ -15,6 +16,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Background="Transparent">
@@ -37,6 +39,10 @@
             <AppBarButton Icon="OpenLocal" Label="Open file..."/>
         </CommandBar>
 
-        <monaco:CodeEditor Grid.Row="2" CodeLanguage="javascript" />
+        <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" />
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" Padding="8,2,8,2">
+            <TextBlock Text="{Binding CursorPositionHint}" d:Text="1:1" />
+        </StackPanel>
     </Grid>
 </Page>

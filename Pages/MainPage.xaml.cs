@@ -1,36 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace Codea
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string CursorPositionHint
+        {
+            get { return _cursorRow + ":" + _cursorColumn; }
+        }
+
+        private uint _cursorRow = 1;
+        private uint _cursorColumn = 1;
+
+        private readonly DispatcherTimer _slowUpdateTimer;
+
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.LayoutMetricsChanged += MainPage_LayoutMetricsChanged;
-            
+
             Window.Current.SetTitleBar(AppTitleBar);
+
+            _slowUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+            _slowUpdateTimer.Tick += SlowUpdateTimer_Tick;
+            _slowUpdateTimer.Start();
+        }
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private async void SlowUpdateTimer_Tick(object sender, object e)
+        {
+            var position = await CodeEditor.GetPositionAsync();
+            _cursorRow = position.LineNumber;
+            _cursorColumn = position.Column;
+
+            OnPropertyChanged("CursorPositionHint");
         }
 
         private void MainPage_LayoutMetricsChanged(CoreApplicationViewTitleBar sender, object args)
