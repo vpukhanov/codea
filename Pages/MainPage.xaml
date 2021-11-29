@@ -37,8 +37,8 @@
         </Grid>
 
         <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Collapsed" HorizontalAlignment="Left" Grid.Row="1">
-            <AppBarButton Icon="Document" Label="New..."/>
-            <AppBarButton Icon="OpenLocal" Label="Open file..."/>
+            <AppBarButton Icon="Document" Label="New..." Command="{Binding NewDocument}" />
+            <AppBarButton Icon="OpenLocal" Label="Open file..." IsEnabled="False" />
         </CommandBar>
 
         <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" HasGlyphMargin="True" TabIndex="1" Text="{Binding Content, Mode=TwoWay}" />

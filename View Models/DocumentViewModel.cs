@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Codea.Commands;
+using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Codea.View_Models
 {
@@ -19,6 +17,13 @@ namespace Codea.View_Models
                 content = value;
                 OnPropertyChanged();
             }
+        }
+
+        public ICommand NewDocument { get; private set; }
+
+        public DocumentViewModel()
+        {
+            NewDocument = new NewDocumentCommand { vm = this };
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
