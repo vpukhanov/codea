@@ -2,21 +2,23 @@
     x:Class="Codea.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Codea"
+    xmlns:local="using:Codea.View_Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:monaco="using:Monaco"
     mc:Ignorable="d"
     Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
-    DataContext="{Binding RelativeSource={RelativeSource Self}}"
     d:DesignHeight="420" d:DesignWidth="680">
+
+    <Page.DataContext>
+        <local:DocumentViewModel />
+    </Page.DataContext>
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid x:Name="AppTitleBar" Background="Transparent">
@@ -39,10 +41,6 @@
             <AppBarButton Icon="OpenLocal" Label="Open file..."/>
         </CommandBar>
 
-        <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" HasGlyphMargin="True" TabIndex="1" />
-
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Background="Transparent" HorizontalAlignment="Right" Padding="8,2,8,2">
-            <TextBlock Text="{Binding CursorPositionHint}" d:Text="1:1" />
-        </StackPanel>
+        <monaco:CodeEditor x:Name="CodeEditor" Grid.Row="2" CodeLanguage="javascript" HasGlyphMargin="True" TabIndex="1" Text="{Binding Content, Mode=TwoWay}" />
     </Grid>
 </Page>
